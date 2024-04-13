@@ -43,16 +43,16 @@ def checking_data(path,column):
         list = []
         for data in csv_r:
             list.append(data[int(column)-1].strip())
-        result = 'True'
         for value in list:
             if value != '':
                 try:
                     int(value)
+                    isnumeric = 'True'
                 except ValueError:
-                    result = 'False'
+                    isnumeric = 'False'
             elif value == '':
                 continue    
-        return result
+        return isnumeric
 
 def clean_and_prepare(lst):
     list1 =[]
@@ -193,7 +193,7 @@ Program stages:
                                 1. Average value
                                 2. Maximum value
                                 3. Minimum value 
-                                Please choose one option. 1/2/3 """)
+                                Please choose one option. 1/2/3: """)
                     if replace == '1':
                         replaced = replacing_avg(data2)
                         print('Empty values are replaced by average value which is',average(data2))
@@ -214,7 +214,7 @@ Program stages:
                     sort_choice = input("""Do you want to sort your data in 
                                     1. Ascending order 
                                     2. Descending order 
-                                    Please choose one option 1/2 """)
+                                    Please choose one option 1/2: """)
                     if sort_choice == '1':
                         sorted = insertion_sort_ascend(replaced)
                     elif sort_choice == '2':
@@ -231,30 +231,31 @@ Program stages:
 
                 visualization(sorted)
                 print('Visualisation completed!')
-                repeat = input("Do you want to go over to another numerical columns: yes/no").lower()
+                repeat = input("Do you want to go over to another numerical columns: yes/no: ").lower()
                 if repeat == 'yes':
                     continue
                 elif repeat == 'no':
                     break
                 else:
                     print("Input Error ")
-                    repeat = input("Do you want to go over to another numerical columns: yes/no").lower()
-            restart = input("Do you want to start the program again from the first stage? yes/no").lower()
+                    repeat = input("Do you want to go over to another numerical columns: yes/no: ").lower()
+            restart = input("Do you want to start the program again from the first stage? yes/no: ").lower()
             if restart == 'yes':
                 continue
             elif restart == 'no':
+                print('Program is closed! ')
                 print('Thank you and good bye!')
                 break
             else:
                 print("Input Error ")
-                restart = input("Do you want to start the program again from the first stage? yes/no").lower()
+                restart = input("Do you want to start the program again from the first stage? yes/no: ").lower()
                 if restart == 'yes':
                     path = input('Enter the path of your csv file: ')
                 elif restart == 'no':
                     break 
                 else:
                     print('Input error ')
-                    restart = input("Do you want to start the program again from the first stage? yes/no").lower()
+                    restart = input("Do you want to start the program again from the first stage? yes/no: ").lower()
         except FileNotFoundError:
             print('File does not exist ')
             path = input('Enter the path of your csv file: ')
